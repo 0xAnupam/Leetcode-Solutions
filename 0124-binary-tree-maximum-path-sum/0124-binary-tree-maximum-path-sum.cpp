@@ -12,10 +12,10 @@
 int ans=-1e4;
 map<TreeNode*,bool>mp;
 int f(TreeNode* root){
-        if(root==NULL ){
+        if(root==NULL ||mp[root] ){
                 return 0;
         }
-       // mp[root]=1;
+        mp[root]=1;
         int res=root->val,a=-1e3,b=a;
         
                 a=f(root->left);
