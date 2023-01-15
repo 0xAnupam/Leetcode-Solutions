@@ -1,21 +1,22 @@
+
 class Solution {
 public:
     int numRescueBoats(vector<int>& people, int limit) {
-        multiset<int> s;
-        int res=0;
-            for(auto &i:people){
-                    s.insert(-i);
-            }
-            while(s.size()){
+        sort(people.begin(),people.end());
+          int i=0,j=people.size()-1;
+            int res=0;
+            while(i<j){
                     res++;
-                    int cnt=0,l=0;
-                    while(l<2 && s.size() && s.lower_bound(cnt-limit)!=s.end() ){
-                           auto p=s.lower_bound(cnt-limit);
-                            cnt-=*p;
-                            s.erase(p);
-                            l++;
+                    if(people[i]+people[j]<=limit){
+                            i++;
+                            j--;
                     }
-                    
+                    else{
+                            j--;
+                    }
+            }
+            if(i==j){
+                    res++;
             }
             return res;
     }
