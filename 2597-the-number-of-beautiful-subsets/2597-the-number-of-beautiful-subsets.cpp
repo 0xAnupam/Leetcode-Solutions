@@ -1,13 +1,11 @@
 long long dp[21];
-
 long long f(vector<int> &nums,int k,int idx,int n){
         if(idx==n){
                 return 0;
         }
         
         long long res=1;
-        int mark[n];
-        memset(mark,-1,sizeof(mark));
+        vector<int> mark(n,-1);
         for(int i=idx+1;i<n;i++){
                 if(nums[i]!=-1 && nums[idx]==nums[i]-k){
                         mark[i]=nums[i];
@@ -30,7 +28,7 @@ class Solution {
 public:
     int beautifulSubsets(vector<int>& nums, int k) {
         sort(nums.begin(),nums.end());
-       //     memset(mark,-1,sizeof(mark));
+            memset(dp,-1,sizeof(dp));
         long long res=0,n=nums.size();
             for(int i=0;i<n;i++){
                     res+=f(nums,k,i,n);
