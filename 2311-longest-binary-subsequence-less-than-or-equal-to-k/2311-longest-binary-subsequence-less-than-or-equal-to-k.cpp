@@ -2,20 +2,13 @@ int f(string &s,int idx,int n,long long cur,int k){
         if(idx==n){
                 return 0;
         }
-        int res=1;
-        if(s[idx]=='1' && cur){
-                int i=idx+1;
-                while(i<n && s[i]=='1'){
-                        i++;
-                }
-        //        res=f(s,i,n,cur,k);
-        }
-        cur*=2;
+
+        cur<<=1;
         cur+=(s[idx]-'0');
         if(cur>k){
                 return 0;
         }
-        return max(res,1+f(s,idx+1,n,cur,k));
+        return 1+f(s,idx+1,n,cur,k);
 }
 class Solution {
 public:
