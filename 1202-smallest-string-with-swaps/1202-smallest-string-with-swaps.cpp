@@ -27,15 +27,15 @@ public:
             for(auto &i:pairs){
                     Union(i[0],i[1]);
             }
-            map<int,priority_queue<char,vector<char>,greater<char>>>mp;
+            map<int,multiset<char> > mp;
             for(int i=0;i<n;i++){
-                    mp[find(i)].push(s[i]);
+                    mp[find(i)].insert(s[i]);
             }
             string res="";
             for(int i=0;i<n;i++){
                     int t=find(i);
-                    res+=(mp[t].top());
-                    mp[t].pop();
+                    res+=*(mp[t].begin());
+                    mp[t].erase(mp[t].begin());
             }
             return res;
     }
