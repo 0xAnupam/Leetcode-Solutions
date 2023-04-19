@@ -20,8 +20,8 @@ public:
     int lenLongestFibSubseq(vector<int>& arr) {
         memset(dp,-1,sizeof(dp));
         int n=arr.size(),res=0;
-        for(int i=0;i<n-2;i++){
-                for(int j=i+1;j<n-1;j++){
+        for(int i=n-3;i>=0;i--){
+                for(int j=n-2;j>i;j--){
                         int p=f(arr,i,j,n);
                         if(p){
                                 res=max(res,2+p);
