@@ -13,7 +13,7 @@ long long f(vector<int>&profit,vector<int>&grp,int idx,int n,int k,int N){
         if(idx==n){
                 return  dp[idx][k][N]=k==0;
         }
-        return  dp[idx][k][N]= (f(profit,grp,idx+1,n,k,N)%mod+f(profit,grp,idx+1,n,k-profit[idx],N-grp[idx])%mod)%mod;
+        return  dp[idx][k][N]= (f(profit,grp,idx+1,n,k,N)+f(profit,grp,idx+1,n,k-profit[idx],N-grp[idx]))%mod;
 }
 class Solution {
 public:
