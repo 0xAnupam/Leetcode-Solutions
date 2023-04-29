@@ -9,12 +9,12 @@ public:
             }
         int m=grid.size(),n=grid[0].size();
             vector<vector<int>> dis(m,vector<int>(n,(int)1e9));
-            priority_queue<pair<int,pair<int,int>>> pq;
+            queue<pair<int,pair<int,int>>> pq;
             dis[0][0]=1;
             pq.push({-1,{0,0}});
             int x,y,d;
             while(pq.size()){
-                    auto p=pq.top();
+                    auto p=pq.front();
                     pq.pop();
                     x=p.second.first;
                     y=p.second.second;
