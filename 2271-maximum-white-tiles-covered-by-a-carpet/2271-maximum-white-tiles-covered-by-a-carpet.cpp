@@ -12,8 +12,9 @@ public:
                        sum[i]+=sum[i-1];
                }
        }
+            vector<int> t={0+carpetLen,0};
        for(int i=0;i<n;i++){
-               vector<int> t={tiles[i][0]+carpetLen,0};
+               t[0]=tiles[i][0]+carpetLen;
                auto it=lower_bound(tiles.begin()+i,tiles.end(),t)-tiles.begin();
                it--;
                int q=sum[it];
