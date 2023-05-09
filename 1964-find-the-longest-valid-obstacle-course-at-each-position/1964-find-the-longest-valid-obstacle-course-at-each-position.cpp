@@ -1,12 +1,13 @@
 const int N=1e7+1;
-int bit[N];
+
 struct FenwickTreeMax {
     int n;
-    
+    unordered_map<int,int> bit;
 
     FenwickTreeMax(int n) {
         this->n = n;
-        memset(bit,0,n*sizeof(int));
+            bit.clear();
+     //   memset(bit,0,n*sizeof(int));
     }
     int getmax(int r) {
         int ret = 0;
