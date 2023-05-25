@@ -1,23 +1,22 @@
-int dp[1000][1000];
+unsigned long long dp[1001][1001];
+
 class Solution {
 public:
-        int res(string &s,string &p,int l,int h){
-                if(h==p.size()){
-                        return 1;
-                }
-                if(l==s.size()){
-                        return 0;
-                }
-                if(dp[l][h]!=-1){
-                        return dp[l][h];
-                }
-                if(s[l]==p[h]){
-                        return dp[l][h]=res(s,p,l+1,h+1)+res(s,p,l+1,h);
-                }
-                return dp[l][h]=res(s,p,l+1,h);
+    int numDistinct(string s, string t) {
+        int len1=s.size(), len2=t.size();
+        memset(dp,0,sizeof(dp));
+        for(int i=0; i<=len1; i++){
+            dp[i][len2] = 1;
         }
-    int numDistinct(string &s, string &t) {
-        memset(dp,-1,sizeof(dp));
-            return res(s,t,0,0);
-    }
+
+        for(int i=len1-1;i>=0;i--){
+                for(int j=len2-1;j>=0;j--){
+                        dp[i][j]=dp[i+1][j];
+                        if(s[i]==t[j]){
+                                dp[i][j]+=dp[i+1][j+1];
+                        }
+                }
+        }
+        return dp[0][0];
+    }
 };
