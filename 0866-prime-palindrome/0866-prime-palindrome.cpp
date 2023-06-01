@@ -22,7 +22,7 @@ void gen(vector<long long> &s,string &t,int len,int idx,int base){
         if(2*idx>=len){
                 long long N=convert(t,base);
                 string S=to_string(N);
-                if(palindrome(t,len) && palindrome(S,S.size())){
+                if(palindrome(S,S.size())){
                         s.push_back(N);
                 }
                 return ;
