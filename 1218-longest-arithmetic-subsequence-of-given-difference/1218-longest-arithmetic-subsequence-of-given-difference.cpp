@@ -12,7 +12,7 @@ long long f(vector<int> &arr,int idx,int n,int diff,map<int,vector<int>> &mp){
         if(mp.find(arr[idx]+diff)==mp.end()){
                 return dp[idx]=res;
         }
-        auto nums=mp[arr[idx]+diff];
+        auto &nums=mp[arr[idx]+diff];
         auto it=upper_bound(nums.begin(),nums.end(),idx)-nums.begin();
         if(it==nums.size()){
                 return dp[idx]=res;
