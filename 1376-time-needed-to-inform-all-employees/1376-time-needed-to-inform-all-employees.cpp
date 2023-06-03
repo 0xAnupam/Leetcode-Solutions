@@ -12,14 +12,17 @@ public:
                             adj[manager[i]].push_back(i);
                     }
             }
-            queue<pair<int,int>> q;
-            q.push({h,0});
+            priority_queue<pair<int,int>> q;
+            q.push({0,h});
             while(q.size()){
-                    auto p=q.front();
+                    auto p=q.top();
                     q.pop();
-                    for(auto &i:adj[p.first]){
-                            time[i]=informTime[p.first]+p.second;
-                            q.push({i,time[i]});
+                    if(time[p.second]+p.first<0){
+                            continue ;
+                    }
+                    for(auto &i:adj[p.second]){
+                            time[i]=informTime[p.second]-p.first;
+                            q.push({-time[i],i});
                     }
             }
             return *max_element(time.begin(),time.end());
