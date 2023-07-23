@@ -15,15 +15,15 @@ public:
     int numSubseq(vector<int>& nums, int target) {
         long long res=0;
         sort(nums.begin(),nums.end());
-        int n=nums.size(),i=0;
-        while(i<n && 2*nums[i]<=target){
-                int p=upper_bound(nums.begin()+i,nums.end(),target-nums[i])-nums.begin();
-               // cout<<i<<'\t'<<p<<'\n';
-                i++;
-                res+=mpow(2,p-i,mod);
-                res%=mod;
-                
-        }    
+        int l=0,r=nums.size()-1,n=nums.size();
+            while(l<n && 2*nums[l]<=target){
+                    while(r>l && nums[l]+nums[r]>target){
+                            r--;
+                    }
+                    res+=(mpow(2,r-l,mod));
+                    res%=mod;
+                    l++;
+            }
             return res;
     }
 };
