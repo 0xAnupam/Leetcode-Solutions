@@ -1,15 +1,1 @@
-WITH cte AS (
-    SELECT stock_name, SUM(price) AS price
-    FROM Stocks
-    WHERE operation = 'Sell'
-    GROUP BY stock_name
-),
-cte2 AS (
-    SELECT stock_name, SUM(price) AS price
-    FROM Stocks
-    WHERE operation = 'Buy'
-    GROUP BY stock_name
-)
-SELECT cte.stock_name, (cte.price - cte2.price) AS capital_gain_loss
-FROM cte
-LEFT JOIN cte2 ON cte.stock_name = cte2.stock_name;
+SELECT stock_name,SUM(CASE WHEN operation='Buy' THEN price*-1 ELSE price END) as capital_gain_loss from Stocks GROUP BY stock_name;
