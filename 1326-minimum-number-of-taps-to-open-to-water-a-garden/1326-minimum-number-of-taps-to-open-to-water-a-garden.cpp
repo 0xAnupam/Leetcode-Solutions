@@ -1,37 +1,39 @@
-const int N=1e4+1;
-int dp[N];
-int f(int idx,int n,vector<int> &arr){
-        if(idx>n){
-                return 0;
-        }
-       
-        if(dp[idx]!=-1){
-                return dp[idx];
-        }
-        int N=min(idx+101,n+1),res=1e9,l=max(0,idx-101);
-        for(int i=l;i<=idx;i++){
-                if(arr[i] && idx-i<=arr[i]){
-                        res=min(res,1+f(i+arr[i]+1,n,arr));
-                }
-        }
-        for(int i=idx;i<N;i++){
-                if(arr[i]&& i-idx<arr[i]){
-                        res=min(res,1+f(i+arr[i]+1,n,arr));
-                }
-        }
-        return dp[idx]=res;
-}
+int* dp;
 class Solution {
 public:
-    int minTaps(int n, vector<int>& ranges) {
-            memset(dp,-1,sizeof(dp));
-            int res=1e9;
-            for(int i=0;i<=n;i++){
-                    if(ranges[i]>=i){
-                            res=min(res,1+f(i+ranges[i]+1,n,ranges));
-                    }
+    int minTaps(int n, vector<int>& ranges)
+    {
+        dp=new int[n+2];
+        for(int i=0 ; i<=n+1 ; i++)
+        {
+            
+            
+            dp[i]=1e8;
+        }
+        dp[0]=0;
+        int new_dp[n+2];
+        for(int i=1 ; i<=n+1 ; i++)
+        {
+              
+            new_dp[0]=0;  
+            for(int j=max(0,i-1-ranges[i-1] ); j<=n ; j++)
+            {   
+                int off=dp[j];
+                int on=1e8;
+                if(i-1-ranges[i-1]<j && i-1+ranges[i-1]>=j)
+                on=1+dp[max(i-1-ranges[i-1] , 0)];
+                new_dp[j]=min(on , off);
+                dp[j]=new_dp[j];
+                if(i-1+ranges[i-1]<j){
+                        break;
+                }
             }
             
-            return res> n ? -1:res;
+            
+        }
+        int val=dp[n];
+        if(val>=1e8)
+        val=-1;
+        return val;
     }
 };
