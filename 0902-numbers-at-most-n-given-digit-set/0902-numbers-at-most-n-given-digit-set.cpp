@@ -1,6 +1,10 @@
+int dp[10][2];
 int f(int idx,int n,int k,int* digits,string &s){
         if(idx==n){
                 return 1;
+        }
+        if(dp[idx][k]!=-1){
+                return dp[idx][k];
         }
         int res=0;
         if(k){
@@ -20,13 +24,14 @@ int f(int idx,int n,int k,int* digits,string &s){
                         }
                 }
         }
-        return res;
+        return dp[idx][k]=res;
 }
 class Solution {
 public:
     int atMostNGivenDigitSet(vector<string>& digits, int N) {
         int digit[10];
             memset(digit,0,sizeof(digit));
+            memset(dp,-1,sizeof(dp));
             for(auto &i:digits){
                     digit[stoi(i)]=1;
             }
