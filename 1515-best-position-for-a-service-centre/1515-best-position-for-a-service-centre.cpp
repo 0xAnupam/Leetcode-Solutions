@@ -43,8 +43,7 @@ double geometricMedian(Point arr[], int n)
             Point newpoint;
             newpoint.x = arr[i].x;
             newpoint.y = arr[i].y;
-            double newd = 
-                   distSum(newpoint, arr, n);
+            double newd = distSum(newpoint, arr, n);
             if (newd < minimum_distance) {
                 minimum_distance = newd;
                 current_point.x = newpoint.x;
@@ -54,34 +53,30 @@ double geometricMedian(Point arr[], int n)
         k++;
     }
  
-    // Assume test_distance to be 1000
+    
     double test_distance = 1000;
     int flag = 0;
  
-    // Test loop for approximation starts here
+   
     while (test_distance > lower_limit) {
  
         flag = 0;
  
-        // Loop for iterating over all 4 neighbours
+       
         for (int i = 0; i < 4; i++) {
  
-            // Finding Neighbours done
+           
             Point newpoint;
             newpoint.x = current_point.x
                  + (double)test_distance * test_point[i].x;
             newpoint.y = current_point.y
                  + (double)test_distance * test_point[i].y;
  
-            // New sum of Euclidean distances
-            // from the neighbor to the given
-            // data points
+            
             double newd = distSum(newpoint, arr, n);
  
             if (newd < minimum_distance) {
  
-                // Approximating and changing
-                // current_point
                 minimum_distance = newd;
                 current_point.x = newpoint.x;
                 current_point.y = newpoint.y;
@@ -90,7 +85,6 @@ double geometricMedian(Point arr[], int n)
             }
         }
  
-       
         if (flag == 0)
             test_distance /= 2;
     }
