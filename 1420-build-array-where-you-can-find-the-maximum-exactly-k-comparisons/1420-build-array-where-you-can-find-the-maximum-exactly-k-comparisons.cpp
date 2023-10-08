@@ -4,15 +4,18 @@ int f(int idx,int n,int m,int k,int p){
         if(idx==n){
                 return k==0;
         }
+        if(n-idx<k){
+                return 0;
+        }
         if(k<0){
                 return 0;
         }
         if(dp[idx][p][k]!=-1){
                 return dp[idx][p][k];
         }
-        int res=0;
-        for(int i=1;i<=m;i++){
-                res+=f(idx+1,n,m,k-(i>p),max(i,p));
+        int res=(p*1LL*f(idx+1,n,m,k,p))%mod;
+        for(int i=p+1;i<=m;i++){
+                res+=f(idx+1,n,m,k-1,i);
                 res%=mod;
         }
         return dp[idx][p][k]=res;
