@@ -21,19 +21,19 @@ public:
             long long res=-1;
             for(int i=0;i<n;i++){
                     for(auto &j:arr[i]){
-                            if(j.second>i){
+                            // if(j.second>i){
                                     for(auto &k:arr[j.second]){
                                             if(k.second!=i && k.second!=j.second){
                                                     int scr=f(arr,i,j.second,k.second);
                                                     if(scr!=-1){
                                                             res=max(res,0LL+scores[i]+j.first+k.first+scr);
-                                                            // break;
+                                                            break;
                                                             
                                                     }
                                             }
                                     }
                             }
-                    }
+                    // }
             }
             return res;
     }
