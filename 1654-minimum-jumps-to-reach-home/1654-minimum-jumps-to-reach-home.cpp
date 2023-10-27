@@ -9,11 +9,11 @@ public:
             for(auto &i:forbidden){
                     dis[i][0]=dis[i][1]=-1;
             }
-            priority_queue<vector<int>> pq;
+            queue<vector<int>> pq;
             pq.push({0,0,0});
             dis[0][0]=0;
             while(pq.size()){
-                    auto p=pq.top();
+                    auto p=pq.front();
                     pq.pop();
                     
                     p[0]*=-1;
