@@ -1,36 +1,43 @@
+vector<int> bits(int n){
+        vector<int> res(32,0);
+        for(int i=0;i<31;i++){
+                if((1<<i)&n){
+                        res[i]=1;
+                }
+        }
+        return res;
+}
+bool ok(vector<int> &arr,int n)
+{
+        auto can_take=bits(n);
+        for(int i=0;i<32;i++){
+                if(can_take[i]+arr[i]>1){
+                        return 0;
+                }
+        }
+        for(int i=0;i<32;i++){
+                arr[i]+=can_take[i];
+        }
+        return 1;
+}
 class Solution {
 public:
-        bool fun(vector<int> &l,vector<int> &h){
-                for(int i=31;i>=0;i--){
-                        if( h[i]-l[i]>1){return 0;}
-                }
-                return 1;
-        }
     int longestNiceSubarray(vector<int>& nums) {
-            int n=nums.size(),res=0;
-            vector<vector<int>> adj(n+1);
-            vector<int> f(32,0);
-            adj[0]=f;
-            for(int i=0;i<n;i++){
-                    for(int j=0;j<32;j++){
-                            if(nums[i]&(1<<j)){
-                                    f[j]++;
-                            }
+        int n=nums.size();
+        vector<int> arr(32,0);
+            int i=0,j=0,res=0;
+            while(i<n){
+                    while(j<n && ok(arr,nums[j])){
+                            j++;
+                            res=max(res,j-i);
                     }
-                    adj[i+1]=f;
-            }
-            for(int i=0;i<n-res;i++){
-                int l=i,h=min(i+31,n-1),m;
-                    while(h-l>=0){
-                            m=l+(h-l)/2;
-                            if(fun(adj[i],adj[m+1])){
-                                    res=max(res,m-i+1);
-                                    l=m+1;
-                            }
-                            else{h=m-1;}
+
+                    auto contri=bits(nums[i]);
+                    for(int k=0;k<32;k++){
+                            arr[k]-=contri[k];
                     }
+                    i++;
             }
             return res;
-           
     }
 };
