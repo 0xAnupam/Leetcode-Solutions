@@ -5,11 +5,12 @@ public:
             if(n%5){
                     return -1;
             }
-            set<int> adj[18];
+            vector<int> adj[18];
             vector<int> dp(n+1,0);
+            vector<int> gg(18,0);
             string s="croak";
             for(int i=0;i<n;i++){
-                    adj[croakOfFrogs[i]-'a'].insert(i);
+                    adj[croakOfFrogs[i]-'a'].emplace_back(i);
             }
             set<int> t;
             for(auto &i:s){
@@ -18,18 +19,22 @@ public:
             if(t.size()>1){
                     return -1;
             }
-            while(adj[2].size()){
+            int K=n/5;
+            while(K--){
                     int idx=0;
                     for(auto &i:s){
-                            auto it=adj[i-'a'].lower_bound(idx);
-                            if(it==adj[i-'a'].end()){
+                            int index=gg[i-'a']++;
+                            if(index>=adj[i-'a'].size()){
                                     return -1;
                             }
-                            idx=*it;
-                            adj[i-'a'].erase(it);
+                            if(adj[i-'a'][index]<idx){
+                                    return -1;
+                            }
+                            idx=adj[i-'a'][index];
                             if(i=='c'){
                                     dp[idx]++;
                             }
+                            
                     }
                     dp[idx+1]--;
             }
