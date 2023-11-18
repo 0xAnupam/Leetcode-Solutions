@@ -30,7 +30,7 @@ public:
             for(int i=0;i<n;i++){
                     for(int j=i;j<n;j++){
                             long long p=arr[i]*1LL*arr[j];
-                            if(mp.find(p)!=mp.end()){
+                            if(p<mod && mp.find(p)!=mp.end()){
                                     adj[mp[p]].push_back(i);
                                     adj[mp[p]].push_back(j);
                             }
