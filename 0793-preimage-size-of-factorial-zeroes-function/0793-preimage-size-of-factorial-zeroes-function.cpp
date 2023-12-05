@@ -9,7 +9,7 @@ long long TrailingZeroes(long long n){
 class Solution {
 public:
     int preimageSizeFZF(int k) {
-        long long l=k,h=5LL*k,m;
+        long long l=4LL*k,h=l+100,m;
             while(l<=h){
                     m=(l+h)/2;
                     if(TrailingZeroes(m)<k){
@@ -19,6 +19,7 @@ public:
                          h=m-1;
                     }
             }
+            cout<<l<<'\n';
            return TrailingZeroes(l)==k ? 5:0;
     }
 };
