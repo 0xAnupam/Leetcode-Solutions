@@ -9,7 +9,7 @@ long long TrailingZeroes(long long n){
 class Solution {
 public:
     int preimageSizeFZF(int k) {
-        long long l=k,h=10LL*k,m;
+        long long l=k,h=5LL*k,m;
             while(l<=h){
                     m=(l+h)/2;
                     if(TrailingZeroes(m)<k){
