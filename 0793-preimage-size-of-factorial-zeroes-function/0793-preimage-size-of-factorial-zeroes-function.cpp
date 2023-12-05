@@ -19,12 +19,6 @@ public:
                          h=m-1;
                     }
             }
-           
-            int res=0;
-            while(TrailingZeroes(l)==k){
-                    res++;
-                    l++;
-            }
-            return res;
+           return TrailingZeroes(l)==k ? 5:0;
     }
 };
