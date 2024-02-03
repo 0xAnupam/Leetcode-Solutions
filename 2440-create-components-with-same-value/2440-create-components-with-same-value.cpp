@@ -36,7 +36,7 @@ vector<pair<int,int>> ff(int n){
 }
 void factors(vector<pair<int,int>> &arr,int idx,int cur,vector<int> &ans){
     if(idx==arr.size()){
-        ans.push_back(cur);
+        ans.emplace_back(cur);
         return ;
     }
     factors(arr,idx+1,cur,ans);
