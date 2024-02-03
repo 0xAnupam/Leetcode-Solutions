@@ -1,6 +1,6 @@
 int flag;
 // vector<int> m[N];
-    int dfs(int u,int p,vector<int> *m,vector<int> &nums,int k){
+    int dfs(int u,int p,vector<int> *m,vector<int> &nums,int &k){
         int sum=nums[u];
         for(auto &x:m[u]){
                
@@ -72,11 +72,13 @@ public:
             auto p=ff(sum);
             vector<int> fact;
             factors(p,0,1,fact);
+            sort(fact.rbegin(),fact.rend());
             for(auto &i:fact){
                     flag=1;
-                dfs(0,-1,m,nums,sum/i);
+                    int k=sum/i;
+                dfs(0,-1,m,nums,k);
                 if(flag==1){
-                    ans=max(ans,i-1);
+                    return i-1;
                 }
             }
         return ans;
