@@ -5,12 +5,13 @@ public:
 // vector<int> m[N];
 
 vector<int> num;
-    int dfs(int u,int p,vector<int> *m,int &k){
+vector<int> *m;
+    int dfs(int u,int p,int &k){
         int sum=num[u];
         for(auto &x:m[u]){
                
             if(p!=x)
-             sum+=dfs(x,u,m,k);
+             sum+=dfs(x,u,k);
         }
         if(sum>k)
         {
@@ -55,12 +56,13 @@ void factors(vector<pair<int,int>> &arr,int idx,int cur,vector<int> &ans){
     int componentValue(vector<int>& nums, vector<vector<int>>& edges) {
         int n = nums.size();
             this->num=nums;
-            vector<int> m[n];
+            vector<int> mm[n];
         for(auto &x:edges)
         {
-            m[x[0]].emplace_back(x[1]);
-            m[x[1]].emplace_back(x[0]);
+            mm[x[0]].emplace_back(x[1]);
+            mm[x[1]].emplace_back(x[0]);
         }
+            this->m=mm;
         int sum=0;
         for(auto &x:nums) sum+=x;
         int ans=0;
@@ -80,7 +82,7 @@ void factors(vector<pair<int,int>> &arr,int idx,int cur,vector<int> &ans){
             for(auto &i:fact){
                     flag=1;
                     int k=sum/i;
-                dfs(0,-1,m,k);
+                dfs(0,-1,k);
                 if(flag==1){
                     return i-1;
                 }
