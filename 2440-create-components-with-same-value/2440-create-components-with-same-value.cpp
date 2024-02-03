@@ -1,6 +1,4 @@
-class Solution {
-public:
-    int flag;
+int flag;
     int dfs(int u,int p,map <int,vector<int>> &m,vector<int> &nums,int k){
         int sum=nums[u];
         for(auto &x:m[u]){
@@ -17,6 +15,9 @@ public:
          return 0;
         return sum;
     }
+class Solution {
+public:
+    
     int componentValue(vector<int>& nums, vector<vector<int>>& edges) {
         int n = nums.size();
         map <int,vector<int>> m;
