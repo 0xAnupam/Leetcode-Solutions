@@ -21,11 +21,12 @@ public:
     
     int componentValue(vector<int>& nums, vector<vector<int>>& edges) {
         int n = nums.size();
-            for(auto &i:m){
-                    while(i.second.size()){
-                            i.second.pop_back();
-                    }
-            }
+            // for(auto &i:m){
+            //         while(i.second.size()){
+            //                 i.second.pop_back();
+            //         }
+            // }
+            m.clear();
         // map <int,vector<int>> m;
         for(auto &x:edges)
         {
