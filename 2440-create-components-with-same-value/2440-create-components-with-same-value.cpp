@@ -1,10 +1,11 @@
 int flag;
-    int dfs(int u,int p,map <int,vector<int>> &m,vector<int> &nums,int k){
+map <int,vector<int>> m;
+    int dfs(int u,int p,vector<int> &nums,int k){
         int sum=nums[u];
         for(auto &x:m[u]){
                
             if(p!=x)
-             sum+=dfs(x,u,m,nums,k);
+             sum+=dfs(x,u,nums,k);
         }
         if(sum>k)
         {
@@ -20,7 +21,12 @@ public:
     
     int componentValue(vector<int>& nums, vector<vector<int>>& edges) {
         int n = nums.size();
-        map <int,vector<int>> m;
+            for(auto &i:m){
+                    while(i.second.size()){
+                            i.second.pop_back();
+                    }
+            }
+        // map <int,vector<int>> m;
         for(auto &x:edges)
         {
             m[x[0]].push_back(x[1]);
@@ -32,7 +38,7 @@ public:
         for(int i=1;i<=sum;i++){
             if(sum%i==0){
                 flag=1;
-                dfs(0,-1,m,nums,sum/i);
+                dfs(0,-1,nums,sum/i);
                 if(flag==1){
                     ans=max(ans,i-1);
                 }
