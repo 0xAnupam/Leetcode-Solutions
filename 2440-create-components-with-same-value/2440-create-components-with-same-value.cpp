@@ -1,10 +1,10 @@
 class Solution {
 public:
     int flag;
-    int dfs(int u,int p,vector<vector<int>> &m,vector<int> &nums,int k){
+    int dfs(int u,int p,map <int,vector<int>> &m,vector<int> &nums,int k){
         int sum=nums[u];
-        for(int i=0;i<m[u].size();i++){
-                int x=m[u][i];
+        for(auto &x:m[u]){
+               
             if(p!=x)
              sum+=dfs(x,u,m,nums,k);
         }
@@ -19,7 +19,7 @@ public:
     }
     int componentValue(vector<int>& nums, vector<vector<int>>& edges) {
         int n = nums.size();
-        vector <vector<int>> m(n);
+        map <int,vector<int>> m;
         for(auto &x:edges)
         {
             m[x[0]].push_back(x[1]);
