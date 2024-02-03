@@ -1,11 +1,16 @@
-int flag;
+
+class Solution {
+public:
+        int flag;
 // vector<int> m[N];
-    int dfs(int u,int p,vector<int> *m,vector<int> &nums,int &k){
-        int sum=nums[u];
+
+vector<int> num;
+    int dfs(int u,int p,vector<int> *m,int &k){
+        int sum=num[u];
         for(auto &x:m[u]){
                
             if(p!=x)
-             sum+=dfs(x,u,m,nums,k);
+             sum+=dfs(x,u,m,k);
         }
         if(sum>k)
         {
@@ -46,11 +51,10 @@ void factors(vector<pair<int,int>> &arr,int idx,int cur,vector<int> &ans){
         factors(arr,idx+1,cur*mult,ans);
     }
 }
-class Solution {
-public:
     
     int componentValue(vector<int>& nums, vector<vector<int>>& edges) {
         int n = nums.size();
+            this->num=nums;
             vector<int> m[n];
         for(auto &x:edges)
         {
@@ -76,7 +80,7 @@ public:
             for(auto &i:fact){
                     flag=1;
                     int k=sum/i;
-                dfs(0,-1,m,nums,k);
+                dfs(0,-1,m,k);
                 if(flag==1){
                     return i-1;
                 }
