@@ -7,7 +7,9 @@ public:
     vector<int> resultArray(vector<int>& nums) {
         pbds A,B;
             vector<int> arr1,arr2;
+            int x,y;
             for(auto &i:nums){
+                    x=A.order_of_key(i),y=B.order_of_key(i);
                     if(arr1.empty()){
                             arr1.emplace_back(i);
                             A.insert(i);
@@ -16,11 +18,11 @@ public:
                             arr2.emplace_back(i);
                             B.insert(i);
                     }
-                    else if(A.order_of_key(i)>B.order_of_key(i)){
+                    else if(x>y){
                             arr1.emplace_back(i);
                             A.insert(i);
                     }
-                    else if(A.order_of_key(i)<B.order_of_key(i)){
+                    else if(x<y){
                             arr2.emplace_back(i);
                             B.insert(i);
                     }
