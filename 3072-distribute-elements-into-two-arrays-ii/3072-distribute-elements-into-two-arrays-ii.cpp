@@ -2,41 +2,47 @@
 #include<ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 typedef tree<int, null_type, greater_equal<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
+const int N=1e5+1;
+int arr1[N];
+int arr2[N];
 class Solution {
 public:
     vector<int> resultArray(vector<int>& nums) {
         pbds A,B;
-            vector<int> arr1,arr2;
+           
             int x,y;
+            int m=0,n=0;
             for(auto &i:nums){
                     x=A.order_of_key(i),y=B.order_of_key(i);
-                    if(arr1.empty()){
-                            arr1.emplace_back(i);
+                    if(m==0){
+                            arr1[m++]=i;
                             A.insert(i);
                     }
-                    else if(arr2.empty()){
-                            arr2.emplace_back(i);
+                    else if(n==0){
+                            arr2[n++]=i;
                             B.insert(i);
                     }
                     else if(x>y){
-                            arr1.emplace_back(i);
+                            arr1[m++]=i;
                             A.insert(i);
                     }
                     else if(x<y){
-                            arr2.emplace_back(i);
+                            arr2[n++]=i;
                             B.insert(i);
                     }
                     else if(A.size()<=B.size()){
-                            arr1.emplace_back(i);
+                            arr1[m++]=i;
                             A.insert(i);
                     }
                     else{
-                            arr2.push_back(i);
+                            arr2[n++]=i;
                             B.insert(i);
                     }
             }
-            arr1.insert(arr1.end(),arr2.begin(),arr2.end());
-            return arr1;
+            vector<int> res(m+n);
+            for(int i=0;i<m;i++)res[i]=arr1[i];
+            for(int i=0;i<n;i++)res[i+m]=arr2[i];
+            return res;
     }
 };
 static bool     _foo = ios::sync_with_stdio(false);
