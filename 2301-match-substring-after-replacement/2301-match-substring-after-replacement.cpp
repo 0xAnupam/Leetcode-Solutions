@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool matchReplacement(string s, string sub, vector<vector<char>>& mappings) {
-        unordered_map<char,unordered_set<char>> mps;
+        map<char,set<char>> mps;
         for(auto mping : mappings) 
             mps[mping[0]].insert(mping[1]);
         
