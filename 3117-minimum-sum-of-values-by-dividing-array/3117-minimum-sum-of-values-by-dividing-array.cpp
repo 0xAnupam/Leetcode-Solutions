@@ -1,5 +1,5 @@
 const int N=1e4+1;
-map<int,int> dp[N][10];
+unordered_map<int,int> dp[N][10];
 int f(vector<int> &nums,int idx,int n,vector<int>& andValues,int j,int m,int cur){
         if(idx==n && j==m)return 0;
         if(idx==n || j==m)return 1e9;
