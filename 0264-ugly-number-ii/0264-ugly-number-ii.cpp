@@ -1,17 +1,16 @@
 class Solution {
 public:
     int nthUglyNumber(int n) {
-        vector<long long> res;
+        long long res=1;
             set<long long> s={1};
-            while(res.size()<n){
-                    auto it=*s.begin();
+            while(n--){
+                    res=*s.begin();
                     s.erase(s.begin());
-                    res.emplace_back(it);    
-                    s.insert(2*it);
-                    s.insert(3*it);
-                    s.insert(5*it);
+                    s.insert(2*res);
+                    s.insert(3*res);
+                    s.insert(5*res);
             }
-            return res[n-1];
+            return res;
             
     }
 };
