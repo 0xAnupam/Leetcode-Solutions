@@ -2,7 +2,7 @@ struct Tries{
 Tries* arr[26];
 bool f=0;
 };
-void f(vector<string> &res,string temp,Tries* head,Tries* root,string &s,int idx,int n){
+void f(vector<string> &res,string &temp,Tries* head,Tries* root,string &s,int idx,int n){
        
         if(head==NULL){
                 return ;
@@ -14,11 +14,18 @@ void f(vector<string> &res,string temp,Tries* head,Tries* root,string &s,int idx
                 }
                 return ;
         }
+    
         if(head->f){
-                f(res,temp+' '+s[idx],root->arr[s[idx]-'a'],root,s,idx+1,n);
+                temp+=' ';
+                temp+=s[idx];
+                f(res,temp,root->arr[s[idx]-'a'],root,s,idx+1,n);
+                temp.pop_back();
+                temp.pop_back();
         }
         if(head->arr[s[idx]-'a']){
-                f(res,temp+s[idx],head->arr[s[idx]-'a'],root,s,idx+1,n);
+                temp+=s[idx];
+                f(res,temp,head->arr[s[idx]-'a'],root,s,idx+1,n);
+                temp.pop_back();
         }
 }
 class Solution {
@@ -36,8 +43,9 @@ public:
                     }
                     head->f=1;
             }
+            string r="";
             vector<string> res;
-            f(res,"",root,root,s,0,s.size());
+            f(res,r,root,root,s,0,s.size());
             return res;
     }
 };
