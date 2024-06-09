@@ -29,7 +29,7 @@ class Solution {
 public:
     int valueAfterKSeconds(int n, int k) {
         fact[0]=fact[1]=1;
-        for(long long i=2;i<N;i++)fact[i]=(i*fact[i-1])%mod;
+        for(long long i=2;i<n+k;i++)fact[i]=(i*fact[i-1])%mod;
         return ncr(n+k-1,k);
     }
 };
