@@ -1,6 +1,5 @@
 long long dp[(int)1e5+1];
 long long f(vector<int> &stones,int idx,int n){
-    if(idx==n)return INT_MAX;
     if(idx==n-1)return stones[idx];
     if(dp[idx]!=LLONG_MAX)return dp[idx];
     return dp[idx]=max(f(stones,idx+1,n),stones[idx]-f(stones,idx+1,n));
