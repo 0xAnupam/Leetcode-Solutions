@@ -1,7 +1,7 @@
 const int mod=1e9+7;
 int dp[2001][1001];
 int  Seg_Tree[4269];
-const int maxA=1002;
+// const int maxA=1002;
 void build(int x,int l,int r){
     if(r-l==1){
         Seg_Tree[x]=1;
@@ -44,11 +44,12 @@ public:
     int countOfPairs(vector<int>& nums) {
         int x=nums.back(),n=nums.size();
         vector<int> arr=nums;
-        arr.push_back(1000);
+        arr.push_back(x);
         for(int i=n-1;i>=0;i--){
             x=min(x,nums[i]);
             nums[i]=x;
         }
+        int maxA=*max_element(arr.begin(),arr.end())+1;
         build(0,0,maxA);
         for(int i=0;i<n;i++){
             for(int j=0;j<=arr[i];j++)dp[i][j]=0;
