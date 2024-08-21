@@ -51,14 +51,14 @@ public:
         }
         build(0,0,maxA);
         for(int i=0;i<n;i++){
-            for(int j=0;j<1001;j++)dp[i][j]=0;
+            for(int j=0;j<=arr[i];j++)dp[i][j]=0;
         }
         for(int i=n-1;i>=0;i--){
             for(int cur=0;cur<=nums[i];cur++){
                 int l=max(arr[i+1]-arr[i]+cur,cur),r=arr[i+1];
                 
-                    dp[i][cur]+=query(0,l,r+1,0,maxA);
-                    dp[i][cur]%=mod;
+                    dp[i][cur]=query(0,l,r+1,0,maxA);
+                    // dp[i][cur]%=mod;
               
             }
             for(int cur=0;cur<=arr[i];cur++){
